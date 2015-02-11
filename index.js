@@ -7,7 +7,7 @@ function Bin(content, width) {
 function mustImplement(name) {
   return function() {
     throw TypeError("MustImplement: " + name );
-  }
+  };
 }
 
 function Position(x, y) {
@@ -15,7 +15,7 @@ function Position(x, y) {
   this.y = y;
 }
 
- // @param height: "known to have atleast this might height available"
+// @param height: "known to have atleast this might height available"
 function Entry(height, width, x, y) {
   this.height   = height;
   this.width    = width;
@@ -23,7 +23,7 @@ function Entry(height, width, x, y) {
 }
 
 // abstract
-Bin.prototype.objectAt = function(collection, index) {
+Bin.prototype.objectAt = function (collection, index) {
   return collection[index];
 };
 
@@ -48,20 +48,20 @@ function insufficientArguments(actual, expected) {
 }
 
 // abstract
-Bin.prototype.length = function() {
+Bin.prototype.length = function () {
   return this.content.length;
-}
+};
 
 // abstract
 Bin.prototype.visibleStartingIndex = mustImplement('visibleStartingIndex');
 
 Bin.prototype.numberVisibleWithin = mustImplement('numberVisibleWithin');
   
-Bin.prototype.heightAtIndex = function(index) {
+Bin.prototype.heightAtIndex = function (index) {
   return this.content[index].height;
 };
 
-Bin.prototype.widthAtIndex = function(index) {
+Bin.prototype.widthAtIndex = function (index) {
   return this.content[index].width;
 };
 
@@ -73,8 +73,6 @@ function ShelfFirst(content, width) {
 ShelfFirst.prototype = Object.create(Bin.prototype);
 ShelfFirst.prototype._super$constructor = Bin;
 ShelfFirst.prototype.isGrid = function ShelfFirst_isGrid(width) {
-  var result = false;
-
   var length = this.length();
   var entry;
 
@@ -83,14 +81,14 @@ ShelfFirst.prototype.isGrid = function ShelfFirst_isGrid(width) {
   for (var i = 0; i < length; i++) {
     entry = this._entryAt(i);
     if (entry.position.x > 0) {
-      return true
+      return true;
     }
   }
 
   return false;
 };
 
-ShelfFirst.prototype.height = function() {
+ShelfFirst.prototype.height = function () {
   var length = this.length();
   if (length === 0) { return 0; }
 
@@ -116,17 +114,17 @@ ShelfFirst.prototype.height = function() {
   return currentY + tallest;
 };
 
-ShelfFirst.prototype.flush = function(position) {
+ShelfFirst.prototype.flush = function (position) {
   var positionEntries = this._positionEntries;
   var length = positionEntries.length;
 
   if (positionEntries.length > position) {
     positionEntries.length = position;
   }
-}
+};
 
 ShelfFirst.prototype.numberVisibleWithin = function (topOffset, width, height, withPadding) {
-  if (width!== this.width) {
+  if (width !== this.width) {
     this.flush(0);
     this.width = width;
   }
@@ -136,12 +134,12 @@ ShelfFirst.prototype.numberVisibleWithin = function (topOffset, width, height, w
   return this._numberVisibleWithin(startingIndex, height, withPadding);
 };
 
-ShelfFirst.prototype._entryAt = function position(index) {
+ShelfFirst.prototype._entryAt = function _entryAt(index) {
   var length = this.length();
   var width = this.width;
 
   if (index >= length) {
-    rangeError(length, index)
+    rangeError(length, index);
   }
 
   var entry;
@@ -167,14 +165,14 @@ ShelfFirst.prototype._entryAt = function position(index) {
   }
 
   for (i = startingIndex; i < index + 1; i++) {
-    currentHeight = this.heightAtIndex(i);
-    currentWidth = this.widthAtIndex(i);
+    var currentHeight = this.heightAtIndex(i);
+    var currentWidth = this.widthAtIndex(i);
 
     if (entry && (currentWidth + rowWidth) > width) {
       // new row
       y = entry.position.y + entry.height;
       x = 0;
-      rowWidth = 0
+      rowWidth = 0;
       rowHeight = currentHeight;
     } else {
       x = rowWidth;
@@ -192,7 +190,7 @@ ShelfFirst.prototype._entryAt = function position(index) {
   return entry;
 };
 
-ShelfFirst.prototype._numberVisibleWithin = function(startingIndex, height, withPadding) {
+ShelfFirst.prototype._numberVisibleWithin = function (startingIndex, height, withPadding) {
   var width = this.width;
   var count = 0;
   var length = this.length();
@@ -249,7 +247,7 @@ ShelfFirst.prototype.position = function position(index, width) {
   return this._entryAt(index).position;
 };
 
-ShelfFirst.prototype.visibleStartingIndex = function(topOffset, width) {
+ShelfFirst.prototype.visibleStartingIndex = function (topOffset, width) {
   if (topOffset === 0 ) { return 0; }
 
   if (width!== this.width) {
@@ -294,15 +292,15 @@ function FixedGrid(content, elementWidth, elementHeight) {
 FixedGrid.prototype = Object.create(Bin.prototype);
 FixedGrid.prototype._super$constructor = Bin;
 
-FixedGrid.prototype.flush = function(index /*, to */) {
+FixedGrid.prototype.flush = function (index /*, to */) {
 
 };
 
-FixedGrid.prototype.isGrid = function(width) {
+FixedGrid.prototype.isGrid = function (width) {
   return (Math.floor(width / this.widthAtIndex(0)) || 1) > 1;
 };
 
-FixedGrid.prototype.visibleStartingIndex = function(topOffset, width) {
+FixedGrid.prototype.visibleStartingIndex = function (topOffset, width) {
   var columns = Math.floor(width / this.widthAtIndex(0)) || 1;
 
   return Math.floor(topOffset / this.heightAtIndex(0)) * columns;
@@ -327,15 +325,15 @@ FixedGrid.prototype.numberVisibleWithin = function (topOffset, width, height, wi
   return Math.max(Math.min(maxNeeded, potentialVisible), 0);
 };
 
-FixedGrid.prototype.widthAtIndex = function(index) {
+FixedGrid.prototype.widthAtIndex = function (index) {
   return this._elementWidth;
 };
 
-FixedGrid.prototype.heightAtIndex = function(index) {
+FixedGrid.prototype.heightAtIndex = function (index) {
   return this._elementWidth;
 };
 
-FixedGrid.prototype.position = function(index, width) {
+FixedGrid.prototype.position = function (index, width) {
   var length = this.length();
   if (length === 0 || index > length) {
     rangeError(length, index);
@@ -349,7 +347,7 @@ FixedGrid.prototype.position = function(index, width) {
   return new Position(x, y);
 };
 
-FixedGrid.prototype.height = function(visibleWidth) {
+FixedGrid.prototype.height = function (visibleWidth) {
   if (typeof visibleWidth !== 'number') {
     throw TypeError('height depends on the first argument of visibleWidth(number)');
   }
@@ -362,7 +360,7 @@ FixedGrid.prototype.height = function(visibleWidth) {
   var totalHeight = rows * this.heightAtIndex(0);
 
   return totalHeight;
-}
+};
 
 Bin.FixedGrid = FixedGrid;
 
