@@ -92,7 +92,7 @@ ShelfFirst.prototype.height = function () {
   var length = this.length();
   if (length === 0) { return 0; }
 
-  // find tallest in last raw, add to Y
+  // find tallest in last row, add to Y
   var tallest  = 0;
   var currentY = 0;
   var entry;
@@ -255,31 +255,62 @@ ShelfFirst.prototype.visibleStartingIndex = function (topOffset, width) {
     this.width = width;
   }
 
-  var top = 0;
-  var position, entry;
-  var previousTop = 0;
-  var index = -1;
+  var height = this.height();
   var length = this.length();
 
-  // TODO: implement fuzzy binary search for large N to reduce cost when search
-  // space is large. Should get this closer to O(log n)
+  // Start searching using the last item in the list
+  // and the bottom of the list for calculating the average hegiht
+  var index = length;
+  var bottom = height;
+  var previousIndex;
 
-  while (topOffset >= top) {
-    index++;
+  for (;;) {
+    // Try to find an item that straddles the top offset
+    // or is flush with it
+    var averageHeight = bottom / index;
 
-    if (index < length) {
-      entry = this._entryAt(index);
-      position = entry.position;
+    // Guess the index based off the average height
+    index = Math.min(Math.floor(topOffset / averageHeight), length - 1);
+    if (previousIndex === index) {
+      return index;
+    }
 
-      top = position.y + entry.height;
-    } else {
-      // topOffset is beyond max, reset to top of screen (for now)
-      // correct approach will be to calculate the ideal position
-      return 0;
+    var entry = this._entryAt(index);
+    var position = entry.position;
+
+    var top = position.y;
+    bottom = top + entry.height;
+
+    previousIndex = index;
+
+    if (bottom > topOffset) {
+      // Walk backwards until we find an item that won't be shown
+      while (bottom >= topOffset) {
+        previousIndex = index;
+        index--;
+
+        if (index === -1) {
+          break;
+        }
+        entry = this._entryAt(index);
+        position = entry.position;
+        bottom = position.y + entry.height;
+      }
+
+      return previousIndex;
+    } else if (topOffset === bottom) {
+      // Walk forwards until we find the next one- it should be close
+      while (bottom <= topOffset) {
+        index++;
+        entry = this._entryAt(index);
+        position = entry.position;
+        bottom = position.y + entry.height;
+      }
+      return index;
     }
   }
 
-  return index;
+  return -1;
 };
 
 function FixedGrid(content, elementWidth, elementHeight) {
