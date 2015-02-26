@@ -259,7 +259,17 @@ ShelfFirst.prototype.visibleStartingIndex = function (topOffset, width) {
   var length = this.length();
 
   // Start searching using the last item in the list
-  // and the bottom of the list for calculating the average hegiht
+  // and the bottom of the list for calculating the average height.
+
+  // This algorithm is necessary for efficiently finding
+  // the starting index of a list with variable heights
+  // in less than O(n) time.
+
+  // Ideally, the performance will be O(log n).
+  // The algorithm implemented assumes that the best case
+  // is a list of items with all equal heights.
+  // Lists with consistent distributions should arrive
+  // at results fairly quickly as well.
   var index = length;
   var bottom = height;
   var previousIndex;
