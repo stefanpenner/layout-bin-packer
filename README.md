@@ -1,4 +1,4 @@
-pack [![Build Status](https://travis-ci.org/stefanpenner/pack.svg?branch=master)](https://travis-ci.org/stefanpenner/pack)
+pack [![Build Status](https://travis-ci.org/stefanpenner/layout-bin-packer.svg?branch=master)](https://travis-ci.org/stefanpenner/layout-bin-packer)
 ====
 
-memoizing implementation of the SHELF-NF (shelf next fit) packing algorithim where orientation of entres is fixed.
+memoizing implementation of various packing algorthims including the SHELF-NF (shelf next fit) packing algorithim where orientation of entres is fixed.

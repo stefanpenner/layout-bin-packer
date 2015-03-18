@@ -1,5 +1,5 @@
 {
-  "name": "bin",
+  "name": "layout-bin-packer",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stefanpenner/pack.git"
+    "url": "https://github.com/stefanpenner/layout-bin-packer.git"
   },
   "author": "stefan.penner@gmail.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stefanpenner/pack/issues"
+    "url": "https://github.com/stefanpenner/layout-bin-packer/issues"
   },
-  "homepage": "https://github.com/stefanpenner/pack"
+  "homepage": "https://github.com/stefanpenner/layout-bin-packer"
 }
