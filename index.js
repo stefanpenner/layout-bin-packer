@@ -56,7 +56,7 @@ Bin.prototype.length = function () {
 Bin.prototype.visibleStartingIndex = mustImplement('visibleStartingIndex');
 
 Bin.prototype.numberVisibleWithin = mustImplement('numberVisibleWithin');
-  
+
 Bin.prototype.heightAtIndex = function (index) {
   return this.content[index].height;
 };
@@ -275,7 +275,7 @@ ShelfFirst.prototype.visibleStartingIndex = function (topOffset, width) {
     } else {
       // topOffset is beyond max, reset to top of screen (for now)
       // correct approach will be to calculate the ideal position
-      return 0; 
+      return 0;
     }
   }
 
