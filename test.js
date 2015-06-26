@@ -149,7 +149,6 @@ assert.deepEqual(bin.position(3, 200), {
 
 var fixed = new Bin.FixedGrid(content, 10, 10);
 
-
 assert.deepEqual(fixed.position(0, 20), {
   x: 0,
   y: 0
@@ -184,6 +183,10 @@ assert.equal(fixed.numberVisibleWithin(20, 20, 20), 4);
 assert.equal(fixed.numberVisibleWithin(0, 20, 20, true), 6);
 assert.equal(fixed.numberVisibleWithin(10, 20, 20, true), 6);
 assert.equal(fixed.numberVisibleWithin(20, 20, 20, true), 4);
+
+fixed = new Bin.FixedGrid(content, 10, 20);
+assert.equal(fixed.widthAtIndex(0), 10);
+assert.equal(fixed.heightAtIndex(0), 20);
 
 var bin = new Bin.ShelfFirst([
   { width: 5,        height: 5 },
