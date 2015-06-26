@@ -371,7 +371,7 @@ FixedGrid.prototype.widthAtIndex = function (index) {
 };
 
 FixedGrid.prototype.heightAtIndex = function (index) {
-  return this._elementWidth;
+  return this._elementHeight;
 };
 
 FixedGrid.prototype.position = function (index, width) {
