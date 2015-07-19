@@ -189,6 +189,19 @@ assert.equal(fixed.widthAtIndex(0), 10);
 assert.equal(fixed.heightAtIndex(0), 20);
 
 var bin = new Bin.ShelfFirst([
+  { width: 50,        height: 100 },
+  { width: 50, height: 25 },
+  { width: 50,        height: 100 }
+], 100);
+
+bin.position(0, 100);
+bin.position(1, 100);
+assert.deepEqual(bin.position(2, 100), {
+  x: 0,
+  y: 100,
+});
+
+var bin = new Bin.ShelfFirst([
   { width: 5,        height: 5 },
   { width: Infinity, height: 5 },
   { width: 5,        height: 5 }
