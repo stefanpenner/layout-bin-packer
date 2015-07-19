@@ -160,6 +160,7 @@ ShelfFirst.prototype._entryAt = function _entryAt(index) {
     startingIndex = entriesLength - 1;
     entry = this._positionEntries[startingIndex];
     rowWidth = entry.position.x + entry.width;
+    rowHeight = entry.height;
     y = entry.position.y;
     startingIndex++;
   }
