@@ -234,7 +234,7 @@ ShelfFirst.prototype._numberVisibleWithin = function (startingIndex, height, wit
 };
 
 ShelfFirst.prototype.position = function position(index, width) {
-  var length = this.length;
+  var length = this.length();
 
   if (length === 0 || index > length) {
     rangeError(length, index);
