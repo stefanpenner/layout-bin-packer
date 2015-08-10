@@ -293,3 +293,9 @@ assert.deepEqual(bin.position(9, 100), {
 });
 
 assert(!bin.isGrid());
+
+var bin = new Bin.ShelfFirst([], 100);
+
+assert.throws(function() {
+  bin.position(0, 100);
+}, RangeError);
