@@ -34,7 +34,7 @@ Bin.prototype.position = mustImplement('position');
 Bin.prototype.flush = mustImplement('flush');
 
 // abstract
-Bin.prototype.height = mustImplement('position');
+Bin.prototype.height = mustImplement('height');
 
 // abstract
 Bin.prototype.isGrid = mustImplement('isGrid');
