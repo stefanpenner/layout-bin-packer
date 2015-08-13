@@ -8,6 +8,17 @@ var contentB = [
 /* y: 175 */ { width:  50, height: 50}                              // y: 175
 ];
 
+
+function assertMustImplementAbstract(method) {
+  assert.throws(
+    function(){ new Bin(contentB, 100)[method]() }, 
+    'MustImplement: ' + method );
+}
+assertMustImplementAbstract('position');
+assertMustImplementAbstract('flush');
+assertMustImplementAbstract('height');
+assertMustImplementAbstract('isGrid');
+
 var bin = new Bin.ShelfFirst(contentB, 100);
 
 assert.deepEqual(bin.position(0, 100), {
