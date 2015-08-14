@@ -50,7 +50,8 @@ var content = [
 
 var bin = new Bin.ShelfFirst(content, 100);
 
-assert(bin.isGrid(), true);
+assert.equal(bin.isGrid(), true);
+assert.equal(bin.isGrid(50), false);
 
 assert.deepEqual(bin.position(0, 100), {
   x: 0,
@@ -93,22 +94,26 @@ assert.deepEqual(bin.position(7, 100), {
 });
 
 assert.equal(bin.height(), 225);
+assert.equal(bin.height(50), 375);
 
-assert.equal(bin.visibleStartingIndex(  0, 100), 0);
+assert.equal(bin.visibleStartingIndex(  0, 100, 100), 0);
 
-assert.equal(bin.visibleStartingIndex( 50, 100), 2);
-assert.equal(bin.visibleStartingIndex( 75, 100), 3);
+assert.equal(bin.visibleStartingIndex( 50, 100, 100), 2);
+assert.equal(bin.visibleStartingIndex( 50, 100, 500), 0);
+assert.equal(bin.visibleStartingIndex( 75, 100, 100), 3);
 
-assert.equal(bin.visibleStartingIndex(100, 100), 3);
-assert.equal(bin.visibleStartingIndex(125, 100), 5);
+assert.equal(bin.visibleStartingIndex(100, 100, 100), 3);
+assert.equal(bin.visibleStartingIndex(125, 100, 100), 5);
 
-assert.equal(bin.visibleStartingIndex(150, 100), 5);
-assert.equal(bin.visibleStartingIndex(175, 100), 7);
+assert.equal(bin.visibleStartingIndex(150, 100, 100), 5);
+assert.equal(bin.visibleStartingIndex(175, 100, 50), 7);
 
-assert.equal(bin.visibleStartingIndex( 49, 100), 0);
+assert.equal(bin.visibleStartingIndex( 49, 100, 100), 0);
 
-assert.equal(bin.visibleStartingIndex(200, 100), 7);
-assert.equal(bin.visibleStartingIndex(400, 100), 7);
+assert.equal(bin.visibleStartingIndex(200, 100, 50), 7);
+assert.equal(bin.visibleStartingIndex(200, 100, 100), 5);
+assert.equal(bin.visibleStartingIndex(400, 100, 50), 7);
+assert.equal(bin.visibleStartingIndex(400, 100, 100), 5);
 
 // index 0; given viewport { height: 50 , width: 100}
 assert.equal(bin.numberVisibleWithin( 0, 100, 50), 2);
@@ -184,6 +189,19 @@ assert.deepEqual(fixed.height(20), 40);
 
 assert(fixed.isGrid(20));
 assert(!fixed.isGrid(10));
+
+assert.equal(fixed.visibleStartingIndex(0, 20, 20), 0);
+assert.equal(fixed.visibleStartingIndex(10, 10, 70), 1);
+assert.equal(fixed.visibleStartingIndex(10, 20, 20), 2);
+assert.equal(fixed.visibleStartingIndex(10, 30, 20), 3);
+assert.equal(fixed.visibleStartingIndex(10, 40, 20), 0);
+assert.equal(fixed.visibleStartingIndex(20, 20, 20), 4);
+assert.equal(fixed.visibleStartingIndex(30, 20, 20), 4);
+assert.equal(fixed.visibleStartingIndex(30, 20, 10), 6);
+
+assert.equal(fixed.visibleStartingIndex(0, 20, 20), 0);
+assert.equal(fixed.visibleStartingIndex(0, 20, 20), 0);
+
 
 // index 0; given viewport { height: 20, width: 20 }
 assert.equal(fixed.numberVisibleWithin(0, 20, 20), 4);

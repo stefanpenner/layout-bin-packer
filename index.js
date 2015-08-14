@@ -27,16 +27,26 @@ Bin.prototype.objectAt = function (collection, index) {
   return collection[index];
 };
 
-// abstract
+// abstract: return coordinates of element at index.
+//
+// @param index: index of the element in content
+// @param width: viewport width.
+// @returns {x, y} coordinates of element at index.
+//
+// May reset cached viewport width.
 Bin.prototype.position = mustImplement('position');
 
-// abstract
+// abstract: reset internal state to be anchored at index.
+// @param index: index of the element in content
 Bin.prototype.flush = mustImplement('flush');
 
-// abstract
+// abstract: return total content height given viewport width.
+// @param width: viewport width
+//
+// May reset cached viewport width.
 Bin.prototype.height = mustImplement('height');
 
-// abstract
+// abstract: true if layout places more than one object on a line.
 Bin.prototype.isGrid = mustImplement('isGrid');
 
 function rangeError(length, index) {
@@ -47,14 +57,31 @@ function insufficientArguments(actual, expected) {
   throw new TypeError("Insufficent Arguments expected: " + expected + " but got " + actual + "");
 }
 
-// abstract
+// abstract: returns number of elements in content.
 Bin.prototype.length = function () {
   return this.content.length;
 };
 
-// abstract
+// maximum offset of content wrt to viewport
+// The amount by which content (after being layed out) is taller than
+// the viewport.
+Bin.prototype.maxContentOffset = function Bin_maxContentOffset(width, height) {
+  var contentHeight = this.height(width);
+  var maxOffset = Math.max(contentHeight - height, 0);
+  return maxOffset;
+}
+
+// abstract: returns index of first visible item.
+// @param topOffset: scroll position
+// @param width: width of viewport
+// @param height: height of viewport
+//
 Bin.prototype.visibleStartingIndex = mustImplement('visibleStartingIndex');
 
+// abstract: returns number of items visible in viewport.
+// @param topOffset: scroll position
+// @param width: width of viewport
+// @param height: height of viewport
 Bin.prototype.numberVisibleWithin = mustImplement('numberVisibleWithin');
 
 Bin.prototype.heightAtIndex = function (index) {
@@ -73,6 +100,10 @@ function ShelfFirst(content, width) {
 ShelfFirst.prototype = Object.create(Bin.prototype);
 ShelfFirst.prototype._super$constructor = Bin;
 ShelfFirst.prototype.isGrid = function ShelfFirst_isGrid(width) {
+  if (width != null && width !== this.width) {
+    this.flush(0);
+    this.width = width;
+  }
   var length = this.length();
   var entry;
 
@@ -88,7 +119,12 @@ ShelfFirst.prototype.isGrid = function ShelfFirst_isGrid(width) {
   return false;
 };
 
-ShelfFirst.prototype.height = function () {
+ShelfFirst.prototype.height = function (width) {
+  if (width != null && width !== this.width) {
+    this.flush(0);
+    this.width = width;
+  }
+
   var length = this.length();
   if (length === 0) { return 0; }
 
@@ -248,13 +284,14 @@ ShelfFirst.prototype.position = function position(index, width) {
   return this._entryAt(index).position;
 };
 
-ShelfFirst.prototype.visibleStartingIndex = function (topOffset, width) {
+ShelfFirst.prototype.visibleStartingIndex = function (topOffset, width, visibleHeight) {
   if (topOffset === 0 ) { return 0; }
 
-  if (width!== this.width) {
+  if (width != null && width!== this.width) {
     this.flush(0);
     this.width = width;
   }
+  topOffset = Math.min(topOffset, this.maxContentOffset(width, visibleHeight));
 
   var height = this.height();
   var length = this.length();
@@ -342,7 +379,8 @@ FixedGrid.prototype.isGrid = function (width) {
   return (Math.floor(width / this.widthAtIndex(0)) || 1) > 1;
 };
 
-FixedGrid.prototype.visibleStartingIndex = function (topOffset, width) {
+FixedGrid.prototype.visibleStartingIndex = function (topOffset, width, height) {
+  topOffset = Math.min(topOffset, this.maxContentOffset(width, height));
   var columns = Math.floor(width / this.widthAtIndex(0)) || 1;
 
   return Math.floor(topOffset / this.heightAtIndex(0)) * columns;
