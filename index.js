@@ -405,6 +405,7 @@ Bin.ShelfFirst = ShelfFirst;
 
 /* global define */
 /* global module */
+/* jshint -W069 */
 if (typeof define === 'function' && define['amd']) {
   define(function() { return Bin; });
 } else if (typeof module !== 'undefined' && module['exports']) {
