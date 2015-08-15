@@ -1,4 +1,6 @@
-pack [![Build Status](https://travis-ci.org/stefanpenner/layout-bin-packer.svg?branch=master)](https://travis-ci.org/stefanpenner/layout-bin-packer)
+# Layout Bin Packer
+
+[![Build Status](https://travis-ci.org/stefanpenner/layout-bin-packer.svg?branch=master)](https://travis-ci.org/stefanpenner/layout-bin-packer)
 [![Code Climate](https://codeclimate.com/github/stefanpenner/layout-bin-packer/badges/gpa.svg)](https://codeclimate.com/github/stefanpenner/layout-bin-packer)
 [![Test Coverage](https://codeclimate.com/github/stefanpenner/layout-bin-packer/badges/coverage.svg)](https://codeclimate.com/github/stefanpenner/layout-bin-packer/coverage)
 
