@@ -6,7 +6,7 @@ function Bin(content, width) {
 
 function mustImplement(name) {
   return function() {
-    throw TypeError("MustImplement: " + name );
+    throw new TypeError("MustImplement: " + name );
   };
 }
 
@@ -43,10 +43,6 @@ function rangeError(length, index) {
   throw new RangeError("Parameter must be within: [" + 0 + " and " + length + ") but was: " + index);
 }
 
-function insufficientArguments(actual, expected) {
-  throw new TypeError("Insufficent Arguments expected: " + expected + " but got " + actual + "");
-}
-
 // abstract
 Bin.prototype.length = function () {
   return this.content.length;
@@ -72,7 +68,7 @@ function ShelfFirst(content, width) {
 
 ShelfFirst.prototype = Object.create(Bin.prototype);
 ShelfFirst.prototype._super$constructor = Bin;
-ShelfFirst.prototype.isGrid = function ShelfFirst_isGrid(width) {
+ShelfFirst.prototype.isGrid = function ShelfFirst_isGrid(/* width */) {
   var length = this.length();
   var entry;
 
@@ -116,8 +112,6 @@ ShelfFirst.prototype.height = function () {
 
 ShelfFirst.prototype.flush = function (position) {
   var positionEntries = this._positionEntries;
-  var length = positionEntries.length;
-
   if (positionEntries.length > position) {
     positionEntries.length = position;
   }
@@ -192,7 +186,6 @@ ShelfFirst.prototype._entryAt = function _entryAt(index) {
 };
 
 ShelfFirst.prototype._numberVisibleWithin = function (startingIndex, height, withPadding) {
-  var width = this.width;
   var count = 0;
   var length = this.length();
   var entry, position;
@@ -334,7 +327,7 @@ function FixedGrid(content, elementWidth, elementHeight) {
 FixedGrid.prototype = Object.create(Bin.prototype);
 FixedGrid.prototype._super$constructor = Bin;
 
-FixedGrid.prototype.flush = function (index /*, to */) {
+FixedGrid.prototype.flush = function (/* index, to */) {
 
 };
 
@@ -367,11 +360,11 @@ FixedGrid.prototype.numberVisibleWithin = function (topOffset, width, height, wi
   return Math.max(Math.min(maxNeeded, potentialVisible), 0);
 };
 
-FixedGrid.prototype.widthAtIndex = function (index) {
+FixedGrid.prototype.widthAtIndex = function (/* index */) {
   return this._elementWidth;
 };
 
-FixedGrid.prototype.heightAtIndex = function (index) {
+FixedGrid.prototype.heightAtIndex = function (/* index */) {
   return this._elementHeight;
 };
 
@@ -391,7 +384,7 @@ FixedGrid.prototype.position = function (index, width) {
 
 FixedGrid.prototype.height = function (visibleWidth) {
   if (typeof visibleWidth !== 'number') {
-    throw TypeError('height depends on the first argument of visibleWidth(number)');
+    throw new TypeError('height depends on the first argument of visibleWidth(number)');
   }
   var length = this.length();
   if (length === 0) { return 0; }
@@ -410,7 +403,8 @@ Bin.Position = Position;
 Bin.Entry = Entry;
 Bin.ShelfFirst = ShelfFirst;
 
-/* global define:true module:true window: true */
+/* global define */
+/* global module */
 if (typeof define === 'function' && define['amd']) {
   define(function() { return Bin; });
 } else if (typeof module !== 'undefined' && module['exports']) {
