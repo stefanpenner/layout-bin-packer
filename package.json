@@ -8,7 +8,7 @@
     "test:debug": "node debug test.js",
     "test:watch": "nodemon test.js",
     "coveralls": "cat coveralls/lcov.info | coveralls",
-    "codeclimate": "cat coveralls/lcov.info | codeclimate-test-reporter"
+    "codeclimate": "codeclimate-test-reporter < coverage/lcov.info"
   },
   "repository": {
     "type": "git",
