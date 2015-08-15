@@ -1,3 +1,4 @@
+/* global require */
 var Bin = require('./index');
 var assert = require('assert');
 var contentB = [
@@ -8,10 +9,9 @@ var contentB = [
 /* y: 175 */ { width:  50, height: 50}                              // y: 175
 ];
 
-
 function assertMustImplementAbstract(method) {
   assert.throws(
-    function(){ new Bin(contentB, 100)[method]() }, 
+    function(){ new Bin(contentB, 100)[method](); },
     'MustImplement: ' + method );
 }
 assertMustImplementAbstract('position');
