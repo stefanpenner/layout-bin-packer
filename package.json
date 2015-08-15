@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node test"
+    "test": "istanbul cover test.js",
+    "test:debug": "node debug test.js",
+    "test:watch": "nodemon test.js",
+    "coveralls": "cat coveralls/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/stefanpenner/layout-bin-packer/issues"
   },
-  "homepage": "https://github.com/stefanpenner/layout-bin-packer"
+  "homepage": "https://github.com/stefanpenner/layout-bin-packer",
+  "devDependencies": {
+    "codeclimate-test-reporter": "^0.1.0",
+    "istanbul": "^0.3.17",
+    "nodemon": "^1.4.1"
+  }
 }
