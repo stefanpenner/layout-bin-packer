@@ -1,3 +1,4 @@
+/* global require */
 var Bin = require('./index');
 var assert = require('assert');
 var contentB = [
@@ -8,10 +9,9 @@ var contentB = [
 /* y: 175 */ { width:  50, height: 50}                              // y: 175
 ];
 
-
 function assertMustImplementAbstract(method) {
   assert.throws(
-    function(){ new Bin(contentB, 100)[method]() }, 
+    function(){ new Bin(contentB, 100)[method](); },
     'MustImplement: ' + method );
 }
 assertMustImplementAbstract('position');
@@ -95,6 +95,14 @@ assert.deepEqual(bin.position(7, 100), {
 
 assert.equal(bin.height(), 225);
 assert.equal(bin.height(50), 375);
+
+assert.equal(bin.maxContentOffset(100, 225), 0);
+assert.equal(bin.maxContentOffset(100, 175), 50);
+assert.equal(bin.maxContentOffset(100, 50), 175);
+assert.equal(bin.maxContentOffset(50, 375), 0);
+assert.equal(bin.maxContentOffset(50, 225), 150);
+assert.equal(bin.maxContentOffset(50, 50), 325);
+
 
 assert.equal(bin.visibleStartingIndex(  0, 100, 100), 0);
 
@@ -189,6 +197,11 @@ assert.deepEqual(fixed.height(20), 40);
 
 assert(fixed.isGrid(20));
 assert(!fixed.isGrid(10));
+
+assert.equal(fixed.maxContentOffset(10, 80), 0);
+assert.equal(fixed.maxContentOffset(10, 50), 30);
+assert.equal(fixed.maxContentOffset(20, 50), 0);
+assert.equal(fixed.maxContentOffset(20, 20), 20);
 
 assert.equal(fixed.visibleStartingIndex(0, 20, 20), 0);
 assert.equal(fixed.visibleStartingIndex(10, 10, 70), 1);
