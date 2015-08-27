@@ -2,10 +2,12 @@
   "name": "layout-bin-packer",
   "version": "1.0.5",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "hint": "jshint test.js index.js",
-    "test": "istanbul cover test.js",
+    "hint": "jshint lib tests",
+    "prepublish": "npm run build",
+    "build": "node bin/build.js",
+    "test": "istanbul cover bin/test.js",
     "test:debug": "node debug test.js",
     "test:watch": "nodemon test.js",
     "coveralls": "cat coveralls/lcov.info | coveralls",
@@ -25,6 +27,9 @@
     "codeclimate-test-reporter": "^0.1.0",
     "istanbul": "^0.3.17",
     "jshint": "^2.8.0",
-    "nodemon": "^1.4.1"
+    "nodemon": "^1.4.1",
+    "qunit-extras": "^1.4.2",
+    "qunitjs": "^1.18.0",
+    "rollup": "^0.14.1"
   }
 }
