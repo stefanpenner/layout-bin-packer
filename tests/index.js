@@ -116,6 +116,7 @@
     assert.equal(bin.maxContentOffset(50, 225), 150);
     assert.equal(bin.maxContentOffset(50, 50), 325);
 
+    assert.equal(bin.visibleStartingIndex(  -10, 100, 100), 0);
 
     assert.equal(bin.visibleStartingIndex(  0, 100, 100), 0);
 
