@@ -1,6 +1,6 @@
 (function (root, factory) {
   if (typeof module !== 'undefined' && module.exports) {
-    factory(require('../dist'), require('qunitjs'));
+    factory(require('../dist/layout-bin-packer'), require('qunitjs'));
   } else {
     factory(root.Bin, root.QUnit);
   }

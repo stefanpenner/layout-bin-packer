@@ -2,8 +2,8 @@
 var path = require('path');
 var rollup = require('rollup');
 
-var entry = path.resolve(__dirname, '../lib/index.js');
-var dest = path.resolve(__dirname, '../dist/index.js');
+var entry = path.resolve(__dirname, '../lib/layout-bin-packer.js');
+var dest = path.resolve(__dirname, '../dist/layout-bin-packer.js');
 
 rollup.rollup({
   entry: entry
