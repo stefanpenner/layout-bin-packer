@@ -4,6 +4,10 @@
   "description": "",
   "main": "dist/layout-bin-packer.js",
   "jsnext:main": "lib/layout-bin-packer.js",
+  "ember-addon": {
+    "main": "ember-addon.js"
+  },
+  "keywords": [ "layout", "ember-addon" ],
   "scripts": {
     "hint": "jshint lib tests",
     "prepublish": "npm run build",
