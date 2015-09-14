@@ -1,6 +1,14 @@
+var path = require('path');
+
 module.exports = {
   name: 'layout-bin-packer',
-  treePaths: {
-    addon: 'lib'
+  init: function () {
+    this.treePaths.addon = 'lib/layout-bin-packer';
+  },
+  treeFor: function (name) {
+    // ensure only the addon module tree is processed
+    if (name === 'addon') {
+      return this._super.treeFor.apply(this, arguments);
+    }
   }
 };
