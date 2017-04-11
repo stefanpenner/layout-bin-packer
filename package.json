@@ -36,5 +36,8 @@
     "qunit-extras": "^1.4.2",
     "qunitjs": "^1.18.0",
     "rollup": "^0.14.1"
+  },
+  "dependencies": {
+    "ember-cli-babel": "^5.2.4"
   }
 }
