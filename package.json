@@ -1,13 +1,16 @@
 {
   "name": "layout-bin-packer",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "",
   "main": "dist/layout-bin-packer.js",
   "jsnext:main": "lib/layout-bin-packer.js",
   "ember-addon": {
     "main": "ember-addon.js"
   },
-  "keywords": [ "layout", "ember-addon" ],
+  "keywords": [
+    "layout",
+    "ember-addon"
+  ],
   "scripts": {
     "hint": "jshint lib tests",
     "prepublish": "npm run build",
