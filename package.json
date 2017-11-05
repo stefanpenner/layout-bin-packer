@@ -41,6 +41,6 @@
     "rollup": "^0.14.1"
   },
   "dependencies": {
-    "ember-cli-babel": "^5.2.4"
+    "ember-cli-babel": "^6.8.2"
   }
 }
