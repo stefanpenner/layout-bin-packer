@@ -1,6 +1,6 @@
 {
   "name": "layout-bin-packer",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "",
   "main": "dist/layout-bin-packer.js",
   "jsnext:main": "lib/layout-bin-packer.js",
