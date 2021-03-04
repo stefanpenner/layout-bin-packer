@@ -186,6 +186,22 @@
     });
   });
 
+  var contentC = [
+    /*0*/{ height:  50, width: 100 },
+    /*1*/{ height: 100, width: 100 },
+    /*2*/{ height:  50, width: 100 },
+  ];
+
+  test('test empty state with shelf first', function (assert) {
+    var bin = new Bin.ShelfFirst(contentC, 100);
+    assert.equal(bin.visibleStartingIndex(50, 100, 100), 1);
+    contentC.splice(0, contentC.length - 1);
+    assert.equal(bin.visibleStartingIndex(50, 100, 100), 0);
+    assert.equal(bin.visibleStartingIndex(1000, 100, 100), 0);
+    contentC.splice(0, contentC.length);
+    assert.equal(bin.visibleStartingIndex(1000, 100, 100), 0);
+  });
+
   QUnit.module('FixedGrid');
 
   test('testing fixed grid', function(assert) {
