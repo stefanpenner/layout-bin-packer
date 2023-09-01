@@ -14,7 +14,7 @@
   "scripts": {
     "hint": "jshint lib tests",
     "prepublish": "npm run build",
-    "build": "node bin/build.js",
+    "build": "rollup lib/layout-bin-packer.js --file dist/layout-bin-packer.js --format umd --name 'Bin'",
     "test": "istanbul cover bin/test.js",
     "test:debug": "node debug test.js",
     "test:watch": "nodemon test.js",
@@ -38,9 +38,9 @@
     "nodemon": "^1.4.1",
     "qunit-extras": "^1.4.2",
     "qunitjs": "^1.18.0",
-    "rollup": "^0.14.1"
+    "rollup": "^3.28.1"
   },
   "dependencies": {
-    "ember-cli-babel": "^6.8.2"
+    "ember-cli-babel": "^7.26.6"
   }
 }
