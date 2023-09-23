@@ -361,7 +361,6 @@
       x: 0,
       y: 675,
     });
-
     assert.ok(!bin.isGrid());
 
     var bin = new Bin.ShelfFirst([], 100);
