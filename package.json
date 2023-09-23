@@ -42,5 +42,9 @@
   },
   "dependencies": {
     "ember-cli-babel": "^7.26.6"
+  },
+  "volta": {
+    "node": "20.7.0",
+    "yarn": "4.0.0-rc.51"
   }
 }
