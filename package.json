@@ -31,15 +31,14 @@
   },
   "homepage": "https://github.com/stefanpenner/layout-bin-packer",
   "devDependencies": {
-    "istanbul": "^0.3.17",
     "node-qunit-puppeteer": "^2.1.2",
-    "nodemon": "^1.4.1",
+    "nodemon": "^3.0.1",
     "qunit-extras": "^1.4.2",
     "qunitjs": "^1.18.0",
-    "rollup": "^3.28.1"
+    "rollup": "^3.29.2"
   },
   "dependencies": {
-    "ember-cli-babel": "^7.26.6"
+    "ember-cli-babel": "^8.0.0"
   },
   "volta": {
     "node": "20.7.0",
