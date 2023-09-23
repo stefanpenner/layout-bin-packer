@@ -16,7 +16,7 @@
     "prepublish": "npm run build",
     "build": "rollup lib/layout-bin-packer.js --file dist/layout-bin-packer.js --format umd --name 'Bin'",
     "test": "istanbul cover bin/test.js",
-    "test:browser": "node-qunit-puppeteer ./tests/index.html  \"--allow-file-access-from-files --no-sandbox\"",
+    "test:browser": "node-qunit-puppeteer ./tests/index.html  \"--allow-file-access-from-files --no-sandbox --headless=new\"",
     "test:debug": "node debug test.js",
     "test:watch": "nodemon test.js",
     "coveralls": "cat coveralls/lcov.info | coveralls",
