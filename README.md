@@ -1,16 +1,22 @@
-# Layout Bin Packer
+# Layout Bin Packer [![CI](https://github.com/stefanpenner/layout-bin-packer/actions/workflows/main.yml/badge.svg)](https://github.com/stefanpenner/layout-bin-packer/actions/workflows/main.yml)
 
-[![Build Status](https://travis-ci.org/stefanpenner/layout-bin-packer.svg?branch=master)](https://travis-ci.org/stefanpenner/layout-bin-packer)
-[![Code Climate](https://codeclimate.com/github/stefanpenner/layout-bin-packer/badges/gpa.svg)](https://codeclimate.com/github/stefanpenner/layout-bin-packer)
-[![Test Coverage](https://codeclimate.com/github/stefanpenner/layout-bin-packer/badges/coverage.svg)](https://codeclimate.com/github/stefanpenner/layout-bin-packer/coverage)
+This library provides the algorithms a list or grid rendering implementation would need for efficient placement of incrementally rendered elements.
 
-====
+**Included Algorithms**
 
-memoizing implementation of various packing algorthims including the SHELF-NF (shelf next fit) packing algorithim where orientation of entres is fixed.
+* **SHELF-NF** (shelf next fit): for rendering elements whos dimensions vary, but are known ahead of time.
+* **Fixed:** for rendering elements whos dimensions do not vary but are known ahead of time.
+
+**What about my favorite Algorithm?**
+
+If you favorite Algorithm can be implemented as a subclass of https://github.com/stefanpenner/layout-bin-packer/blob/master/lib/layout-bin-packer/bin.js we would love to consider a PR adding it to our collection.
+
+**Can this library run in my favorite enviroment?**
+If that environment runs modern JavaScript, then most likely yes.
+Officially the library only runs tests on Node.js and Browser, but given it's implementation it should work work (or easily be made to work) in other JavaScript environments... But let us know!
 
 #### Developing
 
-* `npm test` runs tests + coverage
-* `npm run tets:watch` runs and reruns tests when files change
-* `npm run test:debug` runs tests, but starts in a debug session
-
+* `yarn build` build project
+* `yarn test` run tests
+* `yarn test:browser` run tests in browser
