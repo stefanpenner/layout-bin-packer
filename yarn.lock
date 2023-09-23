@@ -3180,8 +3180,8 @@ __metadata:
     ember-cli-babel: "npm:^8.0.0"
     node-qunit-puppeteer: "npm:^2.1.2"
     nodemon: "npm:^3.0.1"
-    qunit-extras: "npm:^1.4.2"
-    qunitjs: "npm:^1.18.0"
+    qunit-extras: "npm:^1.5.0"
+    qunitjs: "npm:^1.23.1"
     rollup: "npm:^3.29.2"
   languageName: unknown
   linkType: soft
@@ -3898,14 +3898,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qunit-extras@npm:^1.4.2":
+"qunit-extras@npm:^1.5.0":
   version: 1.5.0
   resolution: "qunit-extras@npm:1.5.0"
   checksum: 4cb8bfcf359537262503461b17f45a859175374687996f38479c1e0a3952f8752e659bfb113b5a5b9c0cdaf2ab38f4c8dbee3d0410c87f2c0030c719937fc702
   languageName: node
   linkType: hard
 
-"qunitjs@npm:^1.18.0":
+"qunitjs@npm:^1.23.1":
   version: 1.23.1
   resolution: "qunitjs@npm:1.23.1"
   checksum: d1beb9efe4cce082dea7861927389fe76c56e3bb5ef71dc43d8d8f47460d5ed3f7327c28a802337b43a95436181d9e96db691e0b5dc847fa4c4dcff9a16d3fcf
