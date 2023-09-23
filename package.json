@@ -12,15 +12,13 @@
     "ember-addon"
   ],
   "scripts": {
-    "hint": "jshint lib tests",
     "prepublish": "npm run build",
     "build": "rollup lib/layout-bin-packer.js --file dist/layout-bin-packer.js --format umd --name 'Bin'",
     "test": "istanbul cover bin/test.js",
     "test:browser": "node-qunit-puppeteer ./tests/index.html  \"--allow-file-access-from-files --no-sandbox --headless=new\"",
-    "test:debug": "node debug test.js",
-    "test:watch": "nodemon test.js",
-    "coveralls": "cat coveralls/lcov.info | coveralls",
-    "codeclimate": "codeclimate-test-reporter < coverage/lcov.info"
+    "test:inspect": "node inspect bin/test.js",
+    "test:inspect:brk": "node --inspect-brk bin/test.js",
+    "test:watch": "nodemon bin/test.js"
   },
   "repository": {
     "type": "git",
@@ -33,9 +31,7 @@
   },
   "homepage": "https://github.com/stefanpenner/layout-bin-packer",
   "devDependencies": {
-    "codeclimate-test-reporter": "^0.1.0",
     "istanbul": "^0.3.17",
-    "jshint": "^2.8.0",
     "node-qunit-puppeteer": "^2.1.2",
     "nodemon": "^1.4.1",
     "qunit-extras": "^1.4.2",
