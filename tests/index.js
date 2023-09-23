@@ -4,15 +4,13 @@
   } else {
     factory(root.Bin, root.QUnit);
   }
-})(this, function(Bin, QUnit) {
-  var test = QUnit.test;
-
-  QUnit.module('Bin');
+})(this, function(Bin, { test, module }) {
+  module('Bin');
 
   test('position asserts must implement', function(assert) {
     function assertMustImplementAbstract(method) {
       assert.throws(
-        function() { new Bin.Bin([], 100)[method](); },
+        () => new Bin.Bin([], 100)[method](),
         'MustImplement: ' + method);
     }
     assertMustImplementAbstract('position');
@@ -21,18 +19,18 @@
     assertMustImplementAbstract('isGrid');
   });
 
-  QUnit.module('ShelfFirst');
+  module('ShelfFirst');
 
-  var contentB = [
-  /* y:   0 */ { width: 50, height: 50 }, { width: 60, height: 50 }, // y:   0
-  /* y:  50 */ { width: 100, height: 25 },                            // y:  50
-  /* y:  75 */ { width: 50, height: 50 }, { width: 50, height: 50 }, // y:  75
-  /* y: 125 */ { width: 50, height: 50 }, { width: 50, height: 50 }, // y: 125
-  /* y: 175 */ { width: 50, height: 50 }                              // y: 175
+  const contentB = [
+      /* y:   0 */ { width: 50, height: 50 }, { width: 60, height: 50 }, // y:   0
+      /* y:  50 */ { width: 100, height: 25 },                            // y:  50
+      /* y:  75 */ { width: 50, height: 50 }, { width: 50, height: 50 }, // y:  75
+      /* y: 125 */ { width: 50, height: 50 }, { width: 50, height: 50 }, // y: 125
+      /* y: 175 */ { width: 50, height: 50 }                              // y: 175
   ];
 
   test('test something about shelf first', function(assert) {
-    var bin = new Bin.ShelfFirst(contentB, 100);
+    const bin = new Bin.ShelfFirst(contentB, 100);
 
     assert.deepEqual(bin.position(0, 100), {
       x: 0,
@@ -52,16 +50,16 @@
     assert.equal(bin.isGrid(), true);
   });
 
-  var content = [
-  /* y:   0 */ { width: 50, height: 50 }, { width: 50, height: 50 }, // y:   0
-  /* y:  50 */ { width: 100, height: 25 },                            // y:  50
-  /* y:  75 */ { width: 50, height: 50 }, { width: 50, height: 50 }, // y:  75
-  /* y: 125 */ { width: 50, height: 50 }, { width: 50, height: 50 }, // y: 125
-  /* y: 175 */ { width: 50, height: 50 }                              // y: 175
+  const content = [
+      /* y:   0 */ { width: 50, height: 50 }, { width: 50, height: 50 }, // y:   0
+      /* y:  50 */ { width: 100, height: 25 },                            // y:  50
+      /* y:  75 */ { width: 50, height: 50 }, { width: 50, height: 50 }, // y:  75
+      /* y: 125 */ { width: 50, height: 50 }, { width: 50, height: 50 }, // y: 125
+      /* y: 175 */ { width: 50, height: 50 }                              // y: 175
   ];
 
   test('test something else about shelf first', function(assert) {
-    var bin = new Bin.ShelfFirst(content, 100);
+    const bin = new Bin.ShelfFirst(content, 100);
 
     assert.equal(bin.isGrid(), true);
     assert.equal(bin.isGrid(50), false);
@@ -151,7 +149,7 @@
     assert.equal(bin.numberVisibleWithin(125, 100, 50, true), 3);
     assert.equal(bin.numberVisibleWithin(175, 100, 50, true), 1);
 
-    assert.throws(function() {
+    assert.throws(() => {
       assert.deepEqual(bin.position(8, 100), {
         x: 0,
         y: 175
@@ -186,10 +184,10 @@
     });
   });
 
-  QUnit.module('FixedGrid');
+  module('FixedGrid');
 
   test('testing fixed grid', function(assert) {
-    var fixed = new Bin.FixedGrid(content, 10, 10);
+    const fixed = new Bin.FixedGrid(content, 10, 10);
 
     assert.deepEqual(fixed.position(0, 20), {
       x: 0,
@@ -233,7 +231,6 @@
     assert.equal(fixed.visibleStartingIndex(0, 20, 20), 0);
     assert.equal(fixed.visibleStartingIndex(0, 20, 20), 0);
 
-
     // index 0; given viewport { height: 20, width: 20 }
     assert.equal(fixed.numberVisibleWithin(0, 20, 20), 4);
     assert.equal(fixed.numberVisibleWithin(10, 20, 20), 4);
@@ -246,15 +243,15 @@
   });
 
   test('widthAtIndex and heightAtIndex match fixed width and height', function(assert) {
-    var fixed = new Bin.FixedGrid(content, 10, 20);
+    const fixed = new Bin.FixedGrid(content, 10, 20);
     assert.equal(fixed.widthAtIndex(0), 10);
     assert.equal(fixed.heightAtIndex(0), 20);
   });
 
-  QUnit.module('more ShelfFirst tests');
+  module('more ShelfFirst tests');
 
   test('something', function(assert) {
-    var bin = new Bin.ShelfFirst([
+    const bin = new Bin.ShelfFirst([
       { width: 50, height: 100 },
       { width: 50, height: 25 },
       { width: 50, height: 100 }
@@ -269,7 +266,7 @@
   });
 
   test('something else', function(assert) {
-    var bin = new Bin.ShelfFirst([
+    const bin = new Bin.ShelfFirst([
       { width: 5, height: 5 },
       { width: Infinity, height: 5 },
       { width: 5, height: 5 }
@@ -292,17 +289,17 @@
   });
 
   test('and something else', function(assert) {
-    var bin = new Bin.ShelfFirst([
-      /*0*/{ height: 100, width: 100 },
-      /*1*/{ height: 100, width: 100 },
-      /*2*/{ height: 25, width: Infinity },
-      /*3*/{ height: 100, width: 100 },
-      /*4*/{ height: 100, width: Infinity },
-      /*5*/{ height: 100, width: Infinity },
-      /*6*/{ height: 25, width: 100 },
-      /*7*/{ height: 25, width: 100 },
-      /*8*/{ height: 100, width: 100 },
-      /*9*/{ height: 25, width: 100 }
+    const bin = new Bin.ShelfFirst([
+        /*0*/{ height: 100, width: 100 },
+        /*1*/{ height: 100, width: 100 },
+        /*2*/{ height: 25, width: Infinity },
+        /*3*/{ height: 100, width: 100 },
+        /*4*/{ height: 100, width: Infinity },
+        /*5*/{ height: 100, width: Infinity },
+        /*6*/{ height: 25, width: 100 },
+        /*7*/{ height: 25, width: 100 },
+        /*8*/{ height: 100, width: 100 },
+        /*9*/{ height: 25, width: 100 }
     ], 200);
 
     assert.deepEqual(bin.position(0, 200), {
@@ -363,10 +360,8 @@
     });
     assert.ok(!bin.isGrid());
 
-    var bin = new Bin.ShelfFirst([], 100);
-
-    assert.throws(function() {
-      bin.position(0, 100);
+    assert.throws(() => {
+      new Bin.ShelfFirst([], 100).position(0, 100);
     }, RangeError);
   });
 });
